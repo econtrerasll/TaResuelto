@@ -1,6 +1,9 @@
 /*
 TODO:
 - [x]crear la logica de para crear un prestamista
-- crear la logica para crear un cliente
-- crear la logica para crear y asignar un prestamo
+- [x]crear la logica para crear un cliente
+- [x]crear la logica para crear y asignar un prestamo
+- agregar funciones al prestamista(proveedor) para prestar y para cobrar.
+- agregar funciones al cliente para tomar prestado y pagar prestamo
+- agregar funciones a los prestamos para aumentar, disminuir y terminar.
 */
