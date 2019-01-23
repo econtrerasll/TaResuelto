@@ -14,14 +14,6 @@ type Client struct {
 	ProviderID int32
 }
 
-//Loan is the main object that is provided and received in the platform
-type Loan struct {
-	ID        int32
-	Balance   float64
-	OwnerID   int32
-	CreatorID int32
-}
-
 func check(e error) {
 	if e != nil {
 		panic(e)
@@ -35,16 +27,6 @@ func newClient(id int32, name string, provID int32) {
 	check(err)
 	defer f.Close()
 	f.WriteString(string(jcli))
-}
-
-func newLoan(id int32, balance float64, creatorID int32, ownerID int32) {
-	loan := Loan{ID: id, Balance: balance, CreatorID: creatorID, OwnerID: ownerID}
-	//jloan, _ := json.Marshal(loan)
-	jloan, _ := json.MarshalIndent(loan, "", " ")
-	f, err := os.OpenFile("data/loans.json", os.O_APPEND, os.ModeAppend)
-	check(err)
-	defer f.Close()
-	f.WriteString(string(jloan))
 }
 
 func listProviders() {
