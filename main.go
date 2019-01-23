@@ -7,12 +7,6 @@ import (
 	"os"
 )
 
-// Provider described the entity that give the loans to the clients
-type Provider struct {
-	ID   int32
-	Name string
-}
-
 //Client describe the entity that received the loans
 type Client struct {
 	ID         int32
@@ -34,15 +28,6 @@ func check(e error) {
 	}
 }
 
-func newProvider(id int32, name string) {
-	prov := Provider{ID: id, Name: name}
-	jprov, _ := json.Marshal(prov)
-	f, err := os.OpenFile("data/providers.json", os.O_APPEND, os.ModeAppend)
-	check(err)
-	defer f.Close()
-	f.WriteString(string(jprov))
-}
-
 func newClient(id int32, name string, provID int32) {
 	cli := Client{ID: id, Name: name, ProviderID: provID}
 	jcli, _ := json.Marshal(cli)
@@ -54,7 +39,8 @@ func newClient(id int32, name string, provID int32) {
 
 func newLoan(id int32, balance float64, creatorID int32, ownerID int32) {
 	loan := Loan{ID: id, Balance: balance, CreatorID: creatorID, OwnerID: ownerID}
-	jloan, _ := json.Marshal(loan)
+	//jloan, _ := json.Marshal(loan)
+	jloan, _ := json.MarshalIndent(loan, "", " ")
 	f, err := os.OpenFile("data/loans.json", os.O_APPEND, os.ModeAppend)
 	check(err)
 	defer f.Close()
@@ -68,9 +54,5 @@ func listProviders() {
 }
 
 func main() {
-
-	newProvider(1, "Mateo")
-	listProviders()
-	newClient(1, "Miguel", 112)
-	newLoan(1, 5000, 1, 112)
+	giveLoan(8000, 1, 1)
 }
