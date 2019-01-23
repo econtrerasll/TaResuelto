@@ -7,17 +7,20 @@ import (
 	"os"
 )
 
+// Provider described the entity that give the loans to the clients
 type Provider struct {
 	ID   int32
 	Name string
 }
 
+//Client describe the entity that received the loans
 type Client struct {
 	ID         int32
 	Name       string
 	ProviderID int32
 }
 
+//Loan is the main object that is provided and received in the platform
 type Loan struct {
 	ID        int32
 	Balance   float64
@@ -38,7 +41,6 @@ func newProvider(id int32, name string) {
 	check(err)
 	defer f.Close()
 	f.WriteString(string(jprov))
-	return prov
 }
 
 func newClient(id int32, name string, provID int32) {
