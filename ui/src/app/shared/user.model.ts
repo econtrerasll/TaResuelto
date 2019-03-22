@@ -3,4 +3,6 @@ export class User {
     Password:string;
     email:string;
     FirstName:string;
+    LastName:string;
+    Phone:string;
 }
