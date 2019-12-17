@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 )
@@ -24,7 +25,7 @@ func newLoan(id int32, balance float64, creatorID int32, ownerID int32) {
 }
 
 func loadLoan(loanID int32) Loan {
-	//Function to load saved loans from data resources. This function should search in the existing saved data
+	// Function to load saved loans from data resources. This function should search in the existing saved data
 	var l []Loan
 	f, err := os.Open("data/loans.json") //read the data source
 	if err != nil {
@@ -39,12 +40,18 @@ func loadLoan(loanID int32) Loan {
 	if err != nil {
 		panic(err)
 	}
-
 	// search for the wanted object in the list
-	for items := range l {
-		if items == loanID {
+	for _, items := range l {
+		if items.ID == loanID {
+			fmt.Print(items.Balance)
 			return items
 		}
 	}
+	emptyLoan := Loan{ID: 0, Balance: 0.00, CreatorID: 0, OwnerID: 0}
+	return emptyLoan
+}
+
+func updateLoan(loan Loan) {
+	//TO-DO update existing loans
 
 }

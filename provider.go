@@ -33,5 +33,12 @@ func giveLoan(amount float64, providerID int32, clientID int32) {
 
 func collectLoan(loanID int32, amount float64) {
 	//find the loan by ID, then reduce it balance by amount collected
-	loadLoan(loanID)
+	l := loadLoan(loanID)
+	if l.ID == 0 {
+		panic("loan not found")
+	}
+	var bal float64
+	bal = l.Balance - amount
+	l.Balance = bal
+
 }
